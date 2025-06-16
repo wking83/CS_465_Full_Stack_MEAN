@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TripCardComponent } from '../trip-card/trip-card.component';
 
-import { Trip } from '../models/trip'; 
-import { TripDataService } from '../services/trip-data.service'; 
+import { TripDataService } from '../services/trip-data.service';
+import { Trip } from '../models/trip';
 
 import { Router } from '@angular/router';
 
@@ -12,18 +12,18 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, TripCardComponent],
   templateUrl: './trip-listing.component.html',
-  styleUrls: ['./trip-listing.component.css'],
-  providers: [TripDataService] 
+  styleUrl: './trip-listing.component.css',
+  providers: [TripDataService]
 })
 export class TripListingComponent implements OnInit {
-  
+
   trips!: Trip[];
   message: string = '';
 
   constructor(
     private tripDataService: TripDataService,
     private router: Router
-  ) {
+    ) {
     console.log('trip-listing constructor');
   }
 
@@ -31,10 +31,11 @@ export class TripListingComponent implements OnInit {
     this.router.navigate(['add-trip']);
   }
 
+
   private getStuff(): void {
     this.tripDataService.getTrips()
       .subscribe({
-        next: (value: Trip[]) => {
+        next: (value: any) => {
           this.trips = value;
           if (value.length > 0) {
             this.message = 'There are ' + value.length + ' trips available.';
@@ -53,6 +54,4 @@ export class TripListingComponent implements OnInit {
     console.log('ngOnInit');
     this.getStuff();
   }
-
- 
 }
