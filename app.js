@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -19,6 +17,8 @@ require('./app_api/config/passport');
 
 // Bring in the database
 require('./app_api/models/db');
+
+require('dotenv').config();
 
 
 
@@ -56,7 +56,7 @@ app.use((err, req, res, next) => {
 
 // Wire-up routes to controlelrs
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/travel', travelRouter);
 app.use('/api', apiRouter);
 
